@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:Dharuna/drive.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Dharuna'),
+      routes: {
+        '/drive': (context) => Drive(),
+      },
     );
   }
 }
@@ -75,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
     return Scaffold(
+      backgroundColor: Color(0xFFebedee),
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -88,7 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 100.0,
                 child: FittedBox(
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/drive');
+                    },
                     child: Column(
                       // Replace with a Row for horizontal icon + text
                       mainAxisAlignment: MainAxisAlignment.center,
