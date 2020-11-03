@@ -87,6 +87,26 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 100, right: 20),
+                child: new Image.asset(
+                  'ikshana.png',
+                  width: 100.0,
+                  height: 100.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 100, left: 20),
+                child: new Image.asset(
+                  'app_logo.png',
+                  width: 100.0,
+                  height: 100.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ]),
             Expanded(
               child: Container(
                 height: 100.0,
