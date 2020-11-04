@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
     return Scaffold(
-      backgroundColor: Color(0xFFebedee),
+      backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -87,55 +87,59 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 100, right: 20),
-                child: new Image.asset(
-                  'ikshana.png',
-                  width: 100.0,
-                  height: 100.0,
-                  fit: BoxFit.cover,
+            // Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            //   Container(
+            //     margin: EdgeInsets.only(top: 100, right: 20),
+            //     child: new Image.asset(
+            //       'ikshana.png',
+            //       width: 100.0,
+            //       height: 100.0,
+            //       fit: BoxFit.cover,
+            //     ),
+            //   ),
+            //   Container(
+            //     margin: EdgeInsets.only(top: 100, left: 20),
+            //     child: new Image.asset(
+            //       'app_logo.png',
+            //       width: 100.0,
+            //       height: 100.0,
+            //       fit: BoxFit.cover,
+            //     ),
+            //   ),
+            // ]),
+            Container(
+              margin: EdgeInsets.only(bottom: 80),
+              child: Text(
+                'Drive Safely',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 100, left: 20),
-                child: new Image.asset(
-                  'app_logo.png',
-                  width: 100.0,
-                  height: 100.0,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ]),
-            Expanded(
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/drive');
+              },
               child: Container(
-                height: 100.0,
-                width: 100.0,
-                child: FittedBox(
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/drive');
-                    },
-                    child: Column(
-                      // Replace with a Row for horizontal icon + text
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[Text("Start")],
-                    ),
+                margin: EdgeInsets.only(bottom: 100),
+                height: 300,
+                width: 300,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                    fit: BoxFit.fill,
+                    image: new AssetImage('drive.gif'),
                   ),
                 ),
               ),
             ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: new Image.asset(
-                  'drive.gif',
-                  width: 600.0,
-                  height: 240.0,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            RaisedButton(
+                color: Colors.cyan,
+                child: Text('Start Tracking'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/drive');
+                }),
           ],
         ),
       ),
