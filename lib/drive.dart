@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import "package:latlong/latlong.dart" as latLng;
+import 'dart:math';
+import 'dart:async';
 
 class Drive extends StatefulWidget {
   @override
@@ -9,6 +11,27 @@ class Drive extends StatefulWidget {
 
 class _DriveState extends State<Drive> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => new AlertDialog(
+          title: new Text("Message"),
+          content: new Text("Your location is now being tracked."),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -58,9 +81,7 @@ class _DriveState extends State<Drive> {
                                   Text(
                                     'Closest Vehicle',
                                   ),
-                                  Text(
-                                    '10m',
-                                  ),
+                                  new Roller(),
                                 ],
                               ),
                             ),
@@ -114,6 +135,40 @@ class _DriveState extends State<Drive> {
               ),
             ),
           ]),
+    );
+  }
+}
+
+class Roller extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _TheRandom();
+  }
+}
+
+class _TheRandom extends State<Roller> {
+  double _number = 1;
+  generateRandomNumber() {
+    final _random = new Random();
+    int next() => _random.nextInt(2);
+    if (mounted)
+      setState(() {
+        if (next() == 0 && _number + 0.1 < 10)
+          _number += 0.1;
+        else if (_number - 0.1 > 0.5) _number -= 0.1;
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const oneSec = const Duration(seconds: 2);
+    new Timer.periodic(oneSec, (Timer t) => generateRandomNumber());
+    return Column(
+      children: [
+        Text(
+          double.parse('$_number').toStringAsFixed(2) + ' m',
+        ),
+      ],
     );
   }
 }
